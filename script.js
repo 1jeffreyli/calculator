@@ -39,3 +39,8 @@ zero.addEventListener("click", () => {
     div.innerText = "0"
     display.appendChild(div);
 })
+
+const reset = document.querySelector(".reset");
+reset.addEventListener("click", () => {
+    display.innerText="";
+})
