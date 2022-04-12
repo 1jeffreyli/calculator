@@ -28,3 +28,14 @@ function operate(operator, x, y) {
 }
 
 console.log(operate("add", 2, 3));
+
+const display = document.querySelector(".display");
+const displayText = document.querySelector(".displaytext");
+
+const zero = document.querySelector(".zero");
+zero.addEventListener("click", () => {
+    displayText.innerText="";
+    const div = document.createElement("div");
+    div.innerText = "0"
+    display.appendChild(div);
+})
