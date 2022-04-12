@@ -31,9 +31,19 @@ console.log(operate("add", 2, 3));
 
 const display = document.querySelector(".display");
 const displayText = document.querySelector(".displaytext");
-const toDisplay = [...document.querySelectorAll(".todisplay")];
+const numbersArr = [...document.querySelectorAll(".todisplay")];
 
-
+function displayNumber() {
+    numbersArr.forEach(item => {
+        item.addEventListener("click", () => {
+            displayText.innerText = "";
+            const div = document.createElement("div");
+            div.innerText = `${item["innerText"]}`;
+            display.appendChild(div);
+        });
+    });
+}
+displayNumber();
 
 // a function that changes the display to show the number being clicked
 // function displayNumber(number) {
@@ -53,13 +63,13 @@ const toDisplay = [...document.querySelectorAll(".todisplay")];
 // the click event should call a function that sets the display's innerText to the array item's
 // innerText because each array item in toDisplay (the array) has its number in the innerText property
 
-const zero = document.querySelector(".zero");
-zero.addEventListener("click", () => {
-    displayText.innerText = "";
-    const div = document.createElement("div");
-    div.innerText = "0"
-    display.appendChild(div);
-})
+// const zero = document.querySelector(".zero");
+// zero.addEventListener("click", () => {
+//     displayText.innerText = "";
+//     const div = document.createElement("div");
+//     div.innerText = "0"
+//     display.appendChild(div);
+// })
 
 const reset = document.querySelector(".reset");
 reset.addEventListener("click", () => {
