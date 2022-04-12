@@ -9,8 +9,8 @@
     grid-template-rows: repeat(6, 1fr);
     grid-auto-rows: minmax(150px, auto);
     grid-template-areas: 
-    "display display display display"
-    "display display display display"
+    "reset display display display"
+    "reset display display display"
     "seven eight nine divide"
     "four five six multiply"
     "one two three subtract"
@@ -30,7 +30,6 @@
     background-color: white;
     border-radius: 25px;
     padding: 10px;
-    margin: auto 0;
 }
 
 
@@ -108,4 +107,12 @@
 
 .subtract {
     grid-area: subtract;
+}
+
+.reset {
+    grid-area: reset;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
