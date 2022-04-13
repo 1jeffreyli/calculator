@@ -32,6 +32,7 @@ console.log(operate("add", 2, 3));
 const display = document.querySelector(".display");
 const displayText = document.querySelector(".displaytext");
 const numbersArr = [...document.querySelectorAll(".todisplay")];
+let displayValue = [];
 
 function displayNumber() {
     numbersArr.forEach(item => {
@@ -39,7 +40,9 @@ function displayNumber() {
             displayText.innerText = "";
             const div = document.createElement("div");
             div.innerText = `${item["innerText"]}`;
+            div.style.color = "black";
             display.appendChild(div);
+            displayValue.push(div.innerText);
         });
     });
 }
