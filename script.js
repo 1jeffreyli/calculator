@@ -48,6 +48,12 @@ function displayNumber() {
 }
 displayNumber();
 
+// add event listeners to the operators
+const divideButton = document.querySelector(".divide");
+const multiplyButton = document.querySelector(".multiply");
+const addButton = document.querySelector(".add");
+const subtractButton = document.querySelector(".subtract");
+
 
 // must set up a forEach function that adds the onclick eventListener to each number button
 // the click event should call a function that sets the display's innerText to the array item's
