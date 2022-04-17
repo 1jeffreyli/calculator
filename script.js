@@ -27,7 +27,7 @@ function operate(operator, x, y) {
     }
 }
 
-console.log(operate("add", 2, 3));
+// console.log(operate("add", 2, 3));
 
 const display = document.querySelector(".display");
 const displayText = document.querySelector(".displaytext");
@@ -53,9 +53,34 @@ const divideButton = document.querySelector(".divide");
 const multiplyButton = document.querySelector(".multiply");
 const addButton = document.querySelector(".add");
 const subtractButton = document.querySelector(".subtract");
+const equal = document.querySelector(".equal");
 
-// a function that stores the first number before also storing the operator clicked, then calls operate() on them
-// when the user presses the equal button
+// refactor operator functions with forEach
+const operatorArr = [...document.querySelectorAll(".calculation")];
+function saveCalculation () {
+    displayValue.push(`${this.classList[0]}`);
+    display.innerText = "";
+}
+function doCalculation () {
+    operatorArr.forEach(item => {
+        item.addEventListener("click", saveCalculation);
+    });
+}
+doCalculation();
+
+// addButton.addEventListener("click", () => {
+//     displayValue.push("add");
+//     display.innerText = "";
+// })
+
+// when the equal button is clicked, it carries out the x, y operation and displays it
+equal.addEventListener("click", () => {
+    display.innerText = "";
+    const div = document.createElement("div");
+    div.innerText = operate(displayValue[1], parseInt(displayValue[0]), parseInt(displayValue[2]));
+    div.style.color = "black";
+    display.appendChild(div);
+})
 
 // const zero = document.querySelector(".zero");
 // zero.addEventListener("click", () => {
@@ -65,7 +90,9 @@ const subtractButton = document.querySelector(".subtract");
 //     display.appendChild(div);
 // })
 
+// when A/C button is clicked, it clears the displayValue array and the text displayed
 const reset = document.querySelector(".reset");
 reset.addEventListener("click", () => {
-    display.innerText="";
+    displayValue.length = 0;
+    display.innerText= "";
 })
