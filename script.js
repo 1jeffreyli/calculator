@@ -55,14 +55,25 @@ const addButton = document.querySelector(".add");
 const subtractButton = document.querySelector(".subtract");
 const equal = document.querySelector(".equal");
 
-// a function that stores the first number before also storing the operator clicked, then calls operate() on them
-// when the user presses the equal button
-
-addButton.addEventListener("click", () => {
-    displayValue.push("add");
+// refactor operator functions with forEach
+const operatorArr = [...document.querySelectorAll(".calculation")];
+function saveCalculation () {
+    displayValue.push(`${this.classList[0]}`);
     display.innerText = "";
-})
+}
+function doCalculation () {
+    operatorArr.forEach(item => {
+        item.addEventListener("click", saveCalculation);
+    });
+}
+doCalculation();
 
+// addButton.addEventListener("click", () => {
+//     displayValue.push("add");
+//     display.innerText = "";
+// })
+
+// when the equal button is clicked, it carries out the x, y operation and displays it
 equal.addEventListener("click", () => {
     display.innerText = "";
     const div = document.createElement("div");
@@ -79,6 +90,7 @@ equal.addEventListener("click", () => {
 //     display.appendChild(div);
 // })
 
+// when A/C button is clicked, it clears the displayValue array and the text displayed
 const reset = document.querySelector(".reset");
 reset.addEventListener("click", () => {
     displayValue.length = 0;
