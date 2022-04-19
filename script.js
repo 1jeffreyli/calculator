@@ -31,8 +31,6 @@ function operate(operator, x, y) {
     }
 }
 
-// console.log(operate("add", 2, 3));
-
 const display = document.querySelector(".display");
 const displayText = document.querySelector(".displaytext");
 const numbersArr = [...document.querySelectorAll(".todisplay")];
@@ -61,10 +59,17 @@ const equal = document.querySelector(".equal");
 
 // refactor operator functions with forEach
 const operatorArr = [...document.querySelectorAll(".calculation")];
+let operatorItem = [];
+let firstDisplayValue = [];
+
+
 function saveCalculation () {
-    displayValue.push(`${this.classList[0]}`);
+    operatorItem.push(`${this.classList[0]}`);
+    firstDisplayValue.push(displayValue.join(""));
+    displayValue.length = 0;
     display.innerText = "";
 }
+
 function doCalculation () {
     operatorArr.forEach(item => {
         item.addEventListener("click", saveCalculation);
@@ -72,31 +77,35 @@ function doCalculation () {
 }
 doCalculation();
 
-// addButton.addEventListener("click", () => {
-//     displayValue.push("add");
-//     display.innerText = "";
-// })
+let secondDisplayValue = [];
+function secondValue() {
+    secondDisplayValue.push(displayValue.join(""));
+}
 
 // when the equal button is clicked, it carries out the x, y operation and displays it
+// the operator function takes in the operator saved as a string at index 0 of the operatorItem array
+// then takes the first display value, numbers to the left of the operator which were stored as string elements
+// in an array and then joined together
+// and takes the second value which is to the right of the operator, also stored in an array and joined
 equal.addEventListener("click", () => {
     display.innerText = "";
     const div = document.createElement("div");
-    div.innerText = operate(displayValue[1], parseInt(displayValue[0]), parseInt(displayValue[2]));
+    secondValue();
+    div.innerText = operate(operatorItem[0], parseInt(firstDisplayValue), parseInt(secondDisplayValue));
     div.style.color = "black";
     display.appendChild(div);
 })
 
-// const zero = document.querySelector(".zero");
-// zero.addEventListener("click", () => {
-//     displayText.innerText = "";
-//     const div = document.createElement("div");
-//     div.innerText = "0"
-//     display.appendChild(div);
-// })
+// the above function can only do one operation at a time and A/C must be clicked to do next calculation
+// next step is to allow chain operations, so clearing the display of the old result and showing the new number
+// that was clicked, storing that old result before operating on it with value z
 
-// when A/C button is clicked, it clears the displayValue array and the text displayed
+// when A/C button is clicked, it clears the text displayed and all array values
 const reset = document.querySelector(".reset");
 reset.addEventListener("click", () => {
     displayValue.length = 0;
     display.innerText= "";
+    firstDisplayValue.length = 0;
+    secondDisplayValue.length = 0;
+    operatorItem.length = 0;
 })
