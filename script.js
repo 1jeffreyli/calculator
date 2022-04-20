@@ -68,6 +68,8 @@ const operatorArr = [...document.querySelectorAll(".calculation")];
 let operatorItem = [];
 let firstDisplayValue = [];
 
+// chose to set the zero index equal to the operator string instead of push because pushing
+// continually adds to the array whereas this way replaces the previous operator
 
 function saveCalculation () {
     if (equalResult.length > 0) {
@@ -91,13 +93,17 @@ function doCalculation () {
 }
 doCalculation();
 
+// a function that stores the numbers to the right of an operator in an empty array, then resets
+// the displayValue array
 let secondDisplayValue = [];
 function secondValue() {
     secondDisplayValue[0] = displayValue.join("");
     displayValue.length = 0;
 }
 
-// when the equal button is clicked, it carries out the x, y operation and displays it
+// when the equal button is clicked, it first checks if this is the first operation by checking
+// the equalResult array's length, where > 0 means this isn't the first operation
+// then it carries out the x, y operation and displays it
 // the operator function takes in the operator saved as a string at index 0 of the operatorItem array
 // then takes the first display value, numbers to the left of the operator which were stored as string elements
 // in an array and then joined together
@@ -111,9 +117,6 @@ equal.addEventListener("click", () => {
         equalResult[0] = operate(operatorItem[0], parseInt(equalResult[0]), parseInt(secondDisplayValue[0]));
         display.innerText = equalResult[0];
         display.style.color = "black";
-        // displayValue.length = 0;
-        // secondDisplayValue.length = 0;
-        // operatorItem.length = 0;
     } else {
     display.innerText = "";
     const div = document.createElement("div");
@@ -126,13 +129,6 @@ equal.addEventListener("click", () => {
     }
 })
 
-// the above function can only do one operation at a time and A/C must be clicked to do next calculation
-// next step is to allow chain operations, so clearing the display of the old result and showing the new number
-// that was clicked, storing that old result before operating on it with value z
-
-// maybe rethink how to handle second or later operations by calling a different function on the click event
-// that checks for an existing equalResult
-
 // when A/C button is clicked, it clears the text displayed and all array values
 const reset = document.querySelector(".reset");
 reset.addEventListener("click", () => {
@@ -142,4 +138,12 @@ reset.addEventListener("click", () => {
     secondDisplayValue.length = 0;
     operatorItem.length = 0;
     equalResult.length = 0;
-})
+g})
+
+// next steps:
+// refactoring some of the DOM code
+// round answers
+// check TOP's extra credit tasks
+// making the decimal button functional and accepting decimals as an input
+// adding a backspace button
+// adding keyboard support
