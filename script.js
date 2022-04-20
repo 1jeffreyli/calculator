@@ -44,7 +44,11 @@ function displayNumber() {
             div.innerText = `${item["innerText"]}`;
             div.style.color = "black";
             display.appendChild(div);
+            if (equalResult.length > 0) {
+                secondDisplayValue.push(div.innerText);
+            } else {
             displayValue.push(div.innerText);
+            }
         });
     });
 }
@@ -64,6 +68,14 @@ let firstDisplayValue = [];
 
 
 function saveCalculation () {
+    if (equalResult.length > 0) {
+        operatorItem.length = 0;
+        operatorItem.push(`${this.classList[0]}`);
+        display.innerText = "";
+    } else if (displayValue.length === 0) {
+        operatorItem.push(`${this.classList[0]}`);
+        display.innerText = "";    
+    }
     operatorItem.push(`${this.classList[0]}`);
     firstDisplayValue.push(displayValue.join(""));
     displayValue.length = 0;
@@ -87,13 +99,28 @@ function secondValue() {
 // then takes the first display value, numbers to the left of the operator which were stored as string elements
 // in an array and then joined together
 // and takes the second value which is to the right of the operator, also stored in an array and joined
+let equalResult = [];
+
 equal.addEventListener("click", () => {
+    if (equalResult.length > 0) {
+        display.innerText = "";
+        const div = document.createElement("div");
+        secondValue();
+        equalResult[0] = operate(operatorItem[0], parseInt(equalResult[0]), parseInt(secondDisplayValue[0]));
+        div.innerText = equalResult[0];
+        div.style.color = "black";
+        display.appendChild(div);
+        displayValue.length = 0;
+        secondDisplayValue.length = 0;
+        operatorItem.length = 0;
+    }
     display.innerText = "";
     const div = document.createElement("div");
     secondValue();
-    div.innerText = operate(operatorItem[0], parseInt(firstDisplayValue), parseInt(secondDisplayValue));
+    div.innerText = operate(operatorItem[0], parseInt(firstDisplayValue[0]), parseInt(secondDisplayValue[0]));
     div.style.color = "black";
     display.appendChild(div);
+    equalResult[0] = div.innerText;
 })
 
 // the above function can only do one operation at a time and A/C must be clicked to do next calculation
