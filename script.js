@@ -127,6 +127,9 @@ equal.addEventListener("click", () => {
 // next step is to allow chain operations, so clearing the display of the old result and showing the new number
 // that was clicked, storing that old result before operating on it with value z
 
+// maybe rethink how to handle second or later operations by calling a different function on the click event
+// that checks for an existing equalResult
+
 // when A/C button is clicked, it clears the text displayed and all array values
 const reset = document.querySelector(".reset");
 reset.addEventListener("click", () => {
