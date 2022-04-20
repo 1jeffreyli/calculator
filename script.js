@@ -44,15 +44,17 @@ function displayNumber() {
             div.innerText = `${item["innerText"]}`;
             div.style.color = "black";
             display.appendChild(div);
-            if (equalResult.length > 0) {
-                secondDisplayValue.push(div.innerText);
-            } else {
             displayValue.push(div.innerText);
-            }
         });
     });
 }
 displayNumber();
+
+// function checkDisplay() {
+//     if(equalResult.length > 0 || displayValue.length > 0) {
+
+//     }
+// }
 
 // grab the operators in the DOM
 const divideButton = document.querySelector(".divide");
@@ -70,13 +72,13 @@ let firstDisplayValue = [];
 function saveCalculation () {
     if (equalResult.length > 0) {
         operatorItem.length = 0;
-        operatorItem.push(`${this.classList[0]}`);
+        operatorItem[0] = `${this.classList[0]}`;
         display.innerText = "";
     } else if (displayValue.length === 0) {
-        operatorItem.push(`${this.classList[0]}`);
+        operatorItem[0] = `${this.classList[0]}`;
         display.innerText = "";    
     }
-    operatorItem.push(`${this.classList[0]}`);
+    operatorItem[0] = `${this.classList[0]}`;
     firstDisplayValue.push(displayValue.join(""));
     displayValue.length = 0;
     display.innerText = "";
@@ -91,7 +93,8 @@ doCalculation();
 
 let secondDisplayValue = [];
 function secondValue() {
-    secondDisplayValue.push(displayValue.join(""));
+    secondDisplayValue[0] = displayValue.join("");
+    displayValue.length = 0;
 }
 
 // when the equal button is clicked, it carries out the x, y operation and displays it
@@ -104,16 +107,14 @@ let equalResult = [];
 equal.addEventListener("click", () => {
     if (equalResult.length > 0) {
         display.innerText = "";
-        const div = document.createElement("div");
         secondValue();
         equalResult[0] = operate(operatorItem[0], parseInt(equalResult[0]), parseInt(secondDisplayValue[0]));
-        div.innerText = equalResult[0];
-        div.style.color = "black";
-        display.appendChild(div);
-        displayValue.length = 0;
-        secondDisplayValue.length = 0;
-        operatorItem.length = 0;
-    }
+        display.innerText = equalResult[0];
+        display.style.color = "black";
+        // displayValue.length = 0;
+        // secondDisplayValue.length = 0;
+        // operatorItem.length = 0;
+    } else {
     display.innerText = "";
     const div = document.createElement("div");
     secondValue();
@@ -121,6 +122,8 @@ equal.addEventListener("click", () => {
     div.style.color = "black";
     display.appendChild(div);
     equalResult[0] = div.innerText;
+    operatorItem.length = 0;
+    }
 })
 
 // the above function can only do one operation at a time and A/C must be clicked to do next calculation
@@ -138,4 +141,5 @@ reset.addEventListener("click", () => {
     firstDisplayValue.length = 0;
     secondDisplayValue.length = 0;
     operatorItem.length = 0;
+    equalResult.length = 0;
 })
